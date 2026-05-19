@@ -54,10 +54,9 @@
   .bg-accent .pull-quote { border-left-color: var(--red); color: #3a4556; }
   .quote-attr { font-family: 'Outfit', sans-serif; font-size: .78rem; font-style: normal; font-weight: 600; letter-spacing: .05em; opacity: .55; margin-top: .5rem; }
 
-  /* Photo grid */
-  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 280px 280px; gap: .75rem; margin-top: 2.5rem; max-width: 900px; }
-  .photo-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; display: block; }
-  .photo-wide { grid-column: span 2; }
+  /* Photo gallery */
+  .photo-gallery { columns: 3; column-gap: .75rem; margin-top: 2.5rem; max-width: 960px; }
+  .photo-gallery img { width: 100%; display: block; border-radius: 12px; margin-bottom: .75rem; break-inside: avoid; }
 
   /* Student card */
   .student-card { display: flex; align-items: flex-start; gap: 3rem; max-width: 900px; }
@@ -82,9 +81,7 @@
     .student-card { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
     .pull-quote { border-left: none; border-top: 3px solid rgba(255,255,255,.3); padding-left: 0; padding-top: 1rem; }
     .bg-accent .pull-quote { border-top-color: var(--red); }
-    .photo-grid { grid-template-columns: 1fr; }
-    .photo-grid img, .photo-wide img { height: 240px; }
-    .photo-wide { grid-column: span 1; }
+    .photo-gallery { columns: 2; }
     .principles-list { flex-direction: column; gap: .5rem; }
   }
 </style>
@@ -114,11 +111,18 @@
     <span class="eyebrow">The Experience</span>
     <h2 class="section-title">A Day at Lumen Field</h2>
     <p class="lead" style="margin-top:.75rem;">A tour of the stadium, a conversation that went well past the planned time, and a perspective on careers in sports that no classroom could replicate.</p>
-    <div class="photo-grid">
-      <img class="photo-wide" src="img/events/IMG_5971.jpeg" alt="Group with Michael and Lisa at Lumen Field">
-      <img src="img/events/IMG_5926.jpeg" alt="Lumen Field suite view">
-      <img src="img/events/stadium-view.jpeg" alt="Lumen Field from above">
-      <img class="photo-wide" src="img/events/group-with-michael-lisa.jpeg" alt="GSCG Seattle team at Lumen Field">
+    <div class="photo-gallery">
+      <img src="img/events/group-with-michael-lisa.jpeg" alt="GSCG team with Michael and Lisa">
+      <img src="img/events/suite-group-photo.jpeg" alt="Group photo in the suite">
+      <img src="img/events/suite-field-view.jpeg" alt="Looking out at Lumen Field">
+      <img src="img/events/group-on-field.jpeg" alt="Group at Lumen Field">
+      <img src="img/events/stadium-view.jpeg" alt="Lumen Field stadium view">
+      <img src="img/events/welcome-to-lumen.jpeg" alt="Welcome to Lumen Field">
+      <img src="img/events/concourse-meeting.jpeg" alt="Meeting in the concourse">
+      <img src="img/events/future-of-football.jpeg" alt="The Future of Football is Female">
+      <img src="img/events/heritage-plaza.jpeg" alt="Seahawks Heritage Plaza">
+      <img src="img/events/concourse-tour.jpeg" alt="Touring the concourse">
+      <img src="img/events/lumen-exterior.jpeg" alt="Lumen Field exterior">
     </div>
   </div>
 </section>
