@@ -56,7 +56,14 @@
 
   /* Photo gallery */
   .photo-gallery { columns: 3; column-gap: .75rem; margin-top: 2.5rem; max-width: 960px; }
-  .photo-gallery img { width: 100%; display: block; border-radius: 12px; margin-bottom: .75rem; break-inside: avoid; }
+  .photo-gallery img { width: 100%; display: block; border-radius: 12px; margin-bottom: .75rem; break-inside: avoid; cursor: zoom-in; }
+
+  /* Lightbox */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 2000; align-items: center; justify-content: center; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+  .lightbox-close { position: absolute; top: 1.25rem; right: 1.5rem; background: none; border: none; color: white; font-size: 2rem; cursor: pointer; opacity: .6; line-height: 1; padding: .25rem; }
+  .lightbox-close:hover { opacity: 1; }
 
   /* Student card */
   .student-card { display: flex; align-items: flex-start; gap: 3rem; max-width: 900px; }
@@ -112,17 +119,17 @@
     <h2 class="section-title">A Day at Lumen Field</h2>
     <p class="lead" style="margin-top:.75rem;">A tour of the stadium, a conversation that went well past the planned time, and a perspective on careers in sports that no classroom could replicate.</p>
     <div class="photo-gallery">
-      <img src="img/events/group-with-michael-lisa.jpeg" alt="GSCG team with Michael and Lisa">
-      <img src="img/events/suite-group-photo.jpeg" alt="Group photo in the suite">
-      <img src="img/events/suite-field-view.jpeg" alt="Looking out at Lumen Field">
-      <img src="img/events/group-on-field.jpeg" alt="Group at Lumen Field">
-      <img src="img/events/stadium-view.jpeg" alt="Lumen Field stadium view">
-      <img src="img/events/welcome-to-lumen.jpeg" alt="Welcome to Lumen Field">
-      <img src="img/events/concourse-meeting.jpeg" alt="Meeting in the concourse">
-      <img src="img/events/future-of-football.jpeg" alt="The Future of Football is Female">
-      <img src="img/events/heritage-plaza.jpeg" alt="Seahawks Heritage Plaza">
-      <img src="img/events/concourse-tour.jpeg" alt="Touring the concourse">
-      <img src="img/events/lumen-exterior.jpeg" alt="Lumen Field exterior">
+      <img src="img/events/group-with-michael-lisa.jpeg" alt="GSCG team with Michael and Lisa" onclick="openLightbox(this.src)">
+      <img src="img/events/suite-group-photo.jpeg" alt="Group photo in the suite" onclick="openLightbox(this.src)">
+      <img src="img/events/suite-field-view.jpeg" alt="Looking out at Lumen Field" onclick="openLightbox(this.src)">
+      <img src="img/events/group-on-field.jpeg" alt="Group at Lumen Field" onclick="openLightbox(this.src)">
+      <img src="img/events/stadium-view.jpeg" alt="Lumen Field stadium view" onclick="openLightbox(this.src)">
+      <img src="img/events/welcome-to-lumen.jpeg" alt="Welcome to Lumen Field" onclick="openLightbox(this.src)">
+      <img src="img/events/concourse-meeting.jpeg" alt="Meeting in the concourse" onclick="openLightbox(this.src)">
+      <img src="img/events/future-of-football.jpeg" alt="The Future of Football is Female" onclick="openLightbox(this.src)">
+      <img src="img/events/heritage-plaza.jpeg" alt="Seahawks Heritage Plaza" onclick="openLightbox(this.src)">
+      <img src="img/events/concourse-tour.jpeg" alt="Touring the concourse" onclick="openLightbox(this.src)">
+      <img src="img/events/lumen-exterior.jpeg" alt="Lumen Field exterior" onclick="openLightbox(this.src)">
     </div>
   </div>
 </section>
@@ -314,7 +321,24 @@
   </div>
 </section>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#10005;</button>
+  <img src="" alt="Photo">
+</div>
+
 <script>
+  function openLightbox(src) {
+    document.querySelector('#lightbox img').src = src;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+
   const sections = document.querySelectorAll('.slide');
   const nav = document.getElementById('nav');
   sections.forEach((s, i) => {
