@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You, Michael &amp; Lisa — GSCG 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Outfit', sans-serif; background: #041E42; color: white; overflow-x: hidden; }
+
+  :root {
+    --navy:   #041E42;
+    --red:    #C8102E;
+    --accent: #e8edf5;
+    --border: #dde3ec;
+    --muted:  #6b7a8d;
+    --hawks-green: #002244;
+    --hawks-blue:  #002244;
+  }
+
+  .bg-navy   { background: var(--navy); color: white; }
+  .bg-red    { background: var(--red);  color: white; }
+  .bg-white  { background: white;       color: var(--navy); }
+  .bg-accent { background: var(--accent); color: var(--navy); }
+
+  .slide { min-height: 100vh; position: relative; display: flex; align-items: center; }
+  .slide-inner { width: 100%; max-width: 1100px; margin: 0 auto; padding: 7rem 4rem; }
+
+  .fixed-nav { position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: .5rem; z-index: 100; }
+  .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.3); border: none; cursor: pointer; transition: all .2s; padding: 0; }
+  .nav-dot.active { background: var(--red); transform: scale(1.3); }
+  .nav-dot.dark { background: rgba(4,30,66,.25); }
+  .nav-dot.dark.active { background: var(--red); }
+
+  .eyebrow { font-size: .6rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--red); margin-bottom: 1.1rem; display: block; }
+  .bg-red .eyebrow, .bg-navy .eyebrow { color: rgba(255,255,255,.55); }
+
+  h1.display { font-family: 'Libre Baskerville', serif; font-size: clamp(2.8rem, 5.5vw, 5rem); line-height: 1.1; font-style: italic; }
+  h2.section-title { font-family: 'Libre Baskerville', serif; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; }
+
+  .lead { font-size: 1.05rem; font-weight: 300; line-height: 1.8; max-width: 640px; }
+  .bg-navy .lead, .bg-red .lead { color: rgba(255,255,255,.72); }
+  .bg-white .lead, .bg-accent .lead { color: var(--muted); }
+
+  .pull-quote {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1.08rem; font-style: italic; line-height: 1.78;
+    border-left: 3px solid rgba(255,255,255,.3);
+    padding-left: 1.25rem; color: rgba(255,255,255,.88);
+    margin: 1.5rem 0;
+  }
+  .bg-accent .pull-quote { border-left-color: var(--red); color: #3a4556; }
+  .quote-attr { font-family: 'Outfit', sans-serif; font-size: .78rem; font-style: normal; font-weight: 600; letter-spacing: .05em; opacity: .55; margin-top: .5rem; }
+
+  /* Photo grid */
+  .photo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .75rem; margin-top: 2.5rem; max-width: 900px; }
+  .photo-grid img { width: 100%; height: 280px; object-fit: cover; border-radius: 14px; display: block; }
+  .photo-wide { grid-column: span 2; }
+  .photo-wide img { height: 340px; }
+
+  /* Student card */
+  .student-card { display: flex; align-items: flex-start; gap: 3rem; max-width: 900px; }
+  .headshot { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid rgba(255,255,255,.15); }
+  .headshot.on-accent { border-color: var(--border); }
+  .student-name { font-family: 'Libre Baskerville', serif; font-size: 1.6rem; font-style: italic; margin-bottom: .2rem; }
+  .bg-accent .student-name { color: var(--navy); }
+  .student-meta { font-size: .8rem; font-weight: 500; letter-spacing: .04em; opacity: .5; margin-bottom: 1.5rem; }
+  .student-divider { border: none; border-top: 1px solid rgba(255,255,255,.08); margin: 0; }
+  .student-divider.light { border-top-color: var(--border); }
+
+  /* Principles list */
+  .principles-list { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-top: 2rem; list-style: none; }
+  .principles-list li { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.35); padding-left: .75rem; border-left: 2px solid var(--red); }
+
+  /* Closing */
+  .closing-rule { width: 48px; height: 3px; background: var(--red); margin-bottom: 2rem; border-radius: 2px; }
+  .closing-footer { font-size: .75rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; opacity: .35; margin-top: 3rem; }
+
+  @media (max-width: 700px) {
+    .slide-inner { padding: 5rem 1.5rem; }
+    .student-card { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+    .pull-quote { border-left: none; border-top: 3px solid rgba(255,255,255,.3); padding-left: 0; padding-top: 1rem; }
+    .bg-accent .pull-quote { border-top-color: var(--red); }
+    .photo-grid { grid-template-columns: 1fr; }
+    .photo-grid img, .photo-wide img { height: 240px; }
+    .photo-wide { grid-column: span 1; }
+    .principles-list { flex-direction: column; gap: .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="fixed-nav" id="nav" aria-label="Page sections"></nav>
+
+<!-- S1: HERO -->
+<section class="slide bg-navy" id="s1">
+  <div class="slide-inner">
+    <span class="eyebrow">Gonzaga Sports Consulting Group &nbsp;·&nbsp; Seattle, WA &nbsp;·&nbsp; Spring 2026</span>
+    <h1 class="display">Thank You,<br>Michael &amp; Lisa.</h1>
+    <p class="lead" style="margin-top:1.75rem;">You gave seven students something most professionals never get — a candid look behind the scenes at one of the most iconic sports organizations in the country, and an honest conversation about what a career in sports actually looks like. GSCG is built around four principles, and you helped each of them come to life at Lumen Field.</p>
+    <ul class="principles-list">
+      <li>Commit to growth through GSCG</li>
+      <li>Support each other's growth</li>
+      <li>Do hard things</li>
+      <li>Have fun</li>
+    </ul>
+  </div>
+</section>
+
+<!-- S2: PHOTOS -->
+<section class="slide bg-white" id="s2">
+  <div class="slide-inner">
+    <span class="eyebrow">The Experience</span>
+    <h2 class="section-title">A Day at Lumen Field</h2>
+    <p class="lead" style="margin-top:.75rem;">A tour of the stadium, a conversation that went well past the planned time, and a perspective on careers in sports that no classroom could replicate.</p>
+    <div class="photo-grid">
+      <div class="photo-wide">
+        <img src="https://gu-27.github.io/gscg-photos/photos/Lumens/IMG_5938.jpg" alt="Lumen Field">
+      </div>
+      <div>
+        <img src="https://gu-27.github.io/gscg-photos/photos/Lumens/IMG_5901.jpg" alt="Lumen Field tour">
+      </div>
+      <div>
+        <img src="https://gu-27.github.io/gscg-photos/photos/Lumens/IMG_5924.jpg" alt="Seattle team">
+      </div>
+      <div>
+        <img src="https://gu-27.github.io/gscg-photos/photos/Lumens/IMG_5962.jpg" alt="Lumen Field">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S3: TAKEAWAYS -->
+<section class="slide bg-accent" id="s3">
+  <div class="slide-inner">
+    <span class="eyebrow">Student Reflections</span>
+    <h2 class="section-title" style="margin-bottom:.5rem;">What They Discovered</h2>
+    <p class="lead" style="margin-bottom:3.5rem;">After the visit, each student reflected on their key takeaways from their time with you at Lumen Field.</p>
+
+    <div style="display:flex;flex-direction:column;gap:3.5rem;">
+
+      <div class="student-card">
+        <img class="headshot on-accent" src="img/headshots/paige-olson.jpeg" alt="Paige Olson">
+        <div>
+          <div class="student-name">Paige Olson</div>
+          <div class="student-meta">Senior · Marketing & Finance · Portland, OR · Project Manager</div>
+          <div class="pull-quote">"Hearing how Lisa and Michael built their careers pushed me to think more intentionally about how I can take ownership of my own development. One of my biggest takeaways was how important relationships are — Lisa's experience of building a lasting mentorship was especially impactful. It made me reflect on how I can be more intentional in building relationships and actively supporting others in their growth."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider light">
+
+      <div class="student-card">
+        <img class="headshot on-accent" src="img/headshots/owen-hyatt.jpeg" alt="Owen Hyatt">
+        <div>
+          <div class="student-name">Owen Hyatt</div>
+          <div class="student-meta">Sophomore · Accounting & Finance · Sammamish, WA · Director</div>
+          <div class="pull-quote">"My biggest takeaway was understanding what stage of life you are in. When you're younger, there is time to put your head down and grind. But transitioning into a position where work-life balance is more accepted is also a decision that can be made intentionally. That framing gave me a completely different way to think about building a career."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider light">
+
+      <div class="student-card">
+        <img class="headshot on-accent" src="img/headshots/charlie-herman.png" alt="Charles Herman" style="object-position:center top">
+        <div>
+          <div class="student-name">Charles Herman</div>
+          <div class="student-meta">Senior · Accounting, Finance & MIS · Tamarindo, Costa Rica · Director</div>
+          <div class="pull-quote">"It was clear in the stories of both Michael and Lisa that individual drive is key — but ineffective if not paired with strong teamwork. Their hard work and team-first mentality allowed them to stand out, and empowered them to advocate for the positions that fit them best. That combination is something I want to carry into my own career."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider light">
+
+      <div class="student-card">
+        <img class="headshot on-accent" src="img/headshots/samantha-smith.jpeg" alt="Samantha Smith" style="object-position:85% 20%">
+        <div>
+          <div class="student-name">Samantha Smith</div>
+          <div class="student-meta">Sophomore · Accounting, Ops & Supply Chain · Normandy Park, WA · Consultant</div>
+          <div class="pull-quote">"Lisa shared that a coworker who started as an intern helped her learn Tableau, and they still meet every other week. Michael spent free time learning Excel and AI on his own. And Lisa's answer to how she continues to grow — 'I choose my job based on where I am in life, and right now I'm enjoying the comfort' — was exactly what I needed to hear. That is a skill in itself."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider light">
+
+      <div class="student-card">
+        <img class="headshot on-accent" src="img/headshots/eamon-mohrbacher.jpeg" alt="Eamon Mohrbacher">
+        <div>
+          <div class="student-name">Eamon Mohrbacher</div>
+          <div class="student-meta">Sophomore · Finance & Accounting · Seattle, WA · Consultant</div>
+          <div class="pull-quote">"My two big takeaways were finding a balance between what you are doing professionally and what stage in life you are in, and building relationships and friendships that make your job easier and worthwhile. Both of those came through clearly in how you talked about your own careers."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider light">
+
+      <div class="student-card">
+        <img class="headshot on-accent" src="img/headshots/marcus-heppner.jpeg" alt="Marcus Heppner">
+        <div>
+          <div class="student-name">Marcus Heppner</div>
+          <div class="student-meta">Freshman · Business Admin & Sports Management · San Diego, CA · Consultant</div>
+          <div class="pull-quote">"This visit reminded me how important it is to try new things early on and challenge yourself through unique opportunities. Even work put in behind the scenes can be crucial in nurturing your skillset and adding value to an organization. Seeing that in both of your career stories opened my eyes to what can be built through dedicated effort."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider light">
+
+      <div class="student-card">
+        <img class="headshot on-accent" src="img/headshots/allison-kann.jpeg" alt="Allison Kann">
+        <div>
+          <div class="student-name">Allison Kann</div>
+          <div class="student-meta">Sophomore · Marketing · Carlsbad, CA · Consultant</div>
+          <div class="pull-quote">"When Lisa talked about choosing the best job based on the season of life you are in, that really stuck with me. And hearing that there are a million ways to get where you want to be, and that the path is not linear — that was the reminder I needed. Failure and rejection is just redirection. I left that conversation genuinely more confident."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- S4: MESSAGES -->
+<section class="slide bg-navy" id="s4">
+  <div class="slide-inner">
+    <span class="eyebrow">From the Team</span>
+    <h2 class="section-title" style="margin-bottom:.5rem;">What They Want You to Know</h2>
+    <p class="lead" style="margin-bottom:3.5rem;">Each student wrote a personal message to you directly. Here is what they said.</p>
+
+    <div style="display:flex;flex-direction:column;gap:3.5rem;">
+
+      <div class="student-card">
+        <img class="headshot" src="img/headshots/paige-olson.jpeg" alt="Paige Olson">
+        <div>
+          <div class="student-name">Paige Olson</div>
+          <div class="student-meta">Senior · Marketing & Finance · Portland, OR · Project Manager</div>
+          <div class="pull-quote">"Michael, your perspective on how small conversations can lead to meaningful opportunities challenged me to be more proactive in networking and to view every interaction as a chance to grow. Lisa, hearing how you have shaped your role over time and aligned your career with your season of life gave me a new perspective on how careers can evolve. Thank you both for the time you invested in us."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="img/headshots/owen-hyatt.jpeg" alt="Owen Hyatt">
+        <div>
+          <div class="student-name">Owen Hyatt</div>
+          <div class="student-meta">Sophomore · Accounting & Finance · Sammamish, WA · Director</div>
+          <div class="pull-quote">"Thank you for taking the time to talk with us about your positions and your mindsets across different parts of your careers. The piece about understanding where you are in life really humanized the career grind for me — especially hearing Lisa's perspective on how she has prioritized work-life balance. That was something I will think about for a long time."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="img/headshots/charlie-herman.png" alt="Charles Herman" style="object-position:center top">
+        <div>
+          <div class="student-name">Charles Herman</div>
+          <div class="student-meta">Senior · Accounting, Finance & MIS · Tamarindo, Costa Rica · Director</div>
+          <div class="pull-quote">"Thank you for so generously sharing your time and expertise. Getting to see where you work and hear about your career paths was a genuine privilege. I am especially grateful for the openness and enthusiasm you brought to the conversation — it made a real impact on me at a valuable moment as I prepare to launch my own career."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="img/headshots/samantha-smith.jpeg" alt="Samantha Smith" style="object-position:85% 20%">
+        <div>
+          <div class="student-name">Samantha Smith</div>
+          <div class="student-meta">Sophomore · Accounting, Ops & Supply Chain · Normandy Park, WA · Consultant</div>
+          <div class="pull-quote">"Michael and Lisa, thank you for taking the time to meet with us and give us an incredible tour of Lumen. I appreciate your vulnerability in sharing your journey — being raw about the good and the bad. You are both so inspiring and I look forward to staying connected."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="img/headshots/eamon-mohrbacher.jpeg" alt="Eamon Mohrbacher">
+        <div>
+          <div class="student-name">Eamon Mohrbacher</div>
+          <div class="student-meta">Sophomore · Finance & Accounting · Seattle, WA · Consultant</div>
+          <div class="pull-quote">"I want to thank you both for your time and energy, and express how cool of an experience it was to talk with you, look around the stadium, and get your feedback. It was genuinely one of the highlights of the semester."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="img/headshots/marcus-heppner.jpeg" alt="Marcus Heppner">
+        <div>
+          <div class="student-name">Marcus Heppner</div>
+          <div class="student-meta">Freshman · Business Admin & Sports Management · San Diego, CA · Consultant</div>
+          <div class="pull-quote">"Thank you for taking the time to welcome us to Lumen Field and for grounding your experiences in the hard work that went into paving your career paths. This experience has opened my eyes to what opportunities may await through dedicated work."</div>
+        </div>
+      </div>
+
+      <hr class="student-divider">
+
+      <div class="student-card">
+        <img class="headshot" src="img/headshots/allison-kann.jpeg" alt="Allison Kann">
+        <div>
+          <div class="student-name">Allison Kann</div>
+          <div class="student-meta">Sophomore · Marketing · Carlsbad, CA · Consultant</div>
+          <div class="pull-quote">"Thank you so much, Michael and Lisa! I had such an awesome time touring the stadium and hearing about your journeys to where you are today. You are two very inspirational people and I aspire to carry your mindsets with me when I join the workforce."</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- S5: CLOSING -->
+<section class="slide bg-red" id="s5">
+  <div class="slide-inner">
+    <div class="closing-rule"></div>
+    <span class="eyebrow">Gonzaga Sports Consulting Group</span>
+    <h2 class="section-title" style="max-width:700px;">Thank you for showing our students what a career built on purpose actually looks like.</h2>
+    <p class="lead" style="margin-top:1.75rem;">The conversation you had with these seven students was more than a campus tour — it was a model. You showed them that hard work and relationships are not separate paths, that seasons of life are worth paying attention to, and that a career in sports can be both challenging and deeply rewarding. That is a gift.</p>
+    <div class="closing-footer">Spring 2026 &nbsp;·&nbsp; GSCG Seattle Team &nbsp;·&nbsp; Gonzaga University</div>
+  </div>
+</section>
+
+<script>
+  const sections = document.querySelectorAll('.slide');
+  const nav = document.getElementById('nav');
+  sections.forEach((s, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'nav-dot' + (s.classList.contains('bg-white') || s.classList.contains('bg-accent') ? ' dark' : '');
+    dot.title = 'Section ' + (i + 1);
+    dot.onclick = () => s.scrollIntoView({ behavior: 'smooth' });
+    nav.appendChild(dot);
+  });
+  const dots = nav.querySelectorAll('.nav-dot');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const i = [...sections].indexOf(e.target);
+        dots.forEach((d, j) => d.classList.toggle('active', i === j));
+      }
+    });
+  }, { threshold: 0.4 });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
